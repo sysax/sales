@@ -1,34 +1,3 @@
-```
-# Test coverage
-.coverage
+(docs/SYNC_IMPROVEMENTS.md)
 
-# Dependencies
-.venv/
-venv/
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# Build artifacts
-build/
-dist/
-*.egg-info/
-
-# Logs and temp files
-*.log
-*.tmp
-
-# Environment
-.env
-.env.local
-*.env.*
-
-# Editors
-.vscode/
-.idea/
-
-# Testing
-.pytest_cache/
-.mypy_cache/
-```
+(data/offline.py)
