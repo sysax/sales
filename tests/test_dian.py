@@ -158,25 +158,30 @@ class TestDIANProvider:
 
 
 class TestGenerateCUFE:
-    """Tests para generación de CUFE simulado"""
+    """Tests para generación de CUFE válido según resolución DIAN"""
     
     def test_generate_cufe_format(self):
-        """CUFE tiene formato esperado"""
+        """CUFE es hash SHA-1 hexadecimal (40 caracteres)"""
         cufe = dian.generate_cufe("F001")
         
-        assert cufe.startswith("CUFE-F001-DIAN-")
-        # Formato: CUFE-{folio}-DIAN-{YYYYMMDD}-COLOMBIA
-        parts = cufe.split("-")
-        assert len(parts) >= 5
-        assert parts[-1] == "COLOMBIA"
+        # El nuevo formato es SHA-1 hex (40 chars uppercase)
+        assert len(cufe) == 40
+        assert cufe.isalnum()
+        assert cufe == cufe.upper()
     
-    def test_generate_cufe_includes_date(self):
-        """CUFE incluye fecha actual"""
-        folio = "F123"
-        cufe = dian.generate_cufe(folio)
+    def test_generate_cufe_with_parameters(self):
+        """CUFE generado con parámetros completos"""
+        cufe = dian.generate_cufe(
+            folio="FE001",
+            fecha="2025-01-15T10:30:00",
+            prefijo="FE",
+            total=100000.0,
+            nit_emisor="900123456-3",
+            nit_receptor="800000004-K"
+        )
         
-        today = datetime.now().strftime("%Y%m%d")
-        assert today in cufe
+        assert len(cufe) == 40
+        assert cufe.isalnum()
     
     def test_generate_cufe_different_folio_different_cufe(self):
         """Diferente folio genera diferente CUFE"""
@@ -185,14 +190,12 @@ class TestGenerateCUFE:
         
         assert cufe1 != cufe2
     
-    def test_generate_cufe_same_folio_different_time(self):
-        """Mismo folio en diferente tiempo puede generar CUFE diferente"""
-        folio = "F001"
-        cufe_morning = dian.generate_cufe(folio)
+    def test_generate_cufe_same_folio_different_params(self):
+        """Mismo folio con diferentes parámetros genera CUFE diferente"""
+        cufe1 = dian.generate_cufe("F001", total=1000.0)
+        cufe2 = dian.generate_cufe("F001", total=2000.0)
         
-        # Simular diferente día (esto cambiaría el CUFE)
-        # En producción el CUFE depende del timestamp exacto
-        assert "DIAN" in cufe_morning
+        assert cufe1 != cufe2
 
 
 class TestAuditLogging:
@@ -271,10 +274,10 @@ class TestDIANIntegration:
         dian.set_enabled(True, user="admin")
         assert dian.is_enabled() is True
         
-        # Generar CUFE para una factura
+        # Generar CUFE para una factura (formato hash SHA-1)
         cufe = dian.generate_cufe("FE001")
-        assert "FE001" in cufe
-        assert "DIAN" in cufe
+        assert len(cufe) == 40  # SHA-1 hex
+        assert cufe.isalnum()
     
     def test_disable_after_enabled(self):
         """Puede deshabilitarse después de habilitado"""

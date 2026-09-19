@@ -1,3 +1,13 @@
-(docs/SYNC_IMPROVEMENTS.md)
+```
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-(data/offline.py)
+# Tests
+.pytest_cache/
+
+# Logs
+*.log
+```
