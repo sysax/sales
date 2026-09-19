@@ -1,9 +1,10 @@
 """
 Pantalla de Login refactorizada - Interfaz mejorada.
 Ref: mdcard_03.py - Uso de MDRelativeLayout con posicionamiento absoluto
-Mejoras: Componentes no superpuestos, botones uniformes, paleta vibrante
+Mejoras: Componentes no superpuestos, botones uniformes, paleta Material Design Teal
 """
 from kivy.metrics import dp
+from kivy.utils import get_color_from_hex
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.card import MDCard
 from kivymd.uix.relativelayout import MDRelativeLayout
@@ -27,8 +28,8 @@ class LoginScreen(MDScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.name = "login"
-        # Fondo con color vibrante suave
-        self.md_bg_color = [0.96, 0.97, 0.99, 1]  # Blanco azulado muy claro
+        # Fondo con color primario claro de la paleta teal
+        self.md_bg_color = get_color_from_hex("#b2dfdb")  # Light primary color
         
         self.user_field = None
         self.pass_field = None
@@ -66,7 +67,7 @@ class LoginScreen(MDScreen):
             radius=[8, 8, 8, 8],
         )
         
-        # Botón de login - estilo filled
+        # Botón de login - estilo filled con color primario
         login_button = MDButton(
             MDButtonText(text="Iniciar sesión"),
             style="filled",
@@ -78,6 +79,7 @@ class LoginScreen(MDScreen):
             on_release=self.do_login,
             radius=[8, 8, 8, 8],
         )
+        login_button.md_bg_color = get_color_from_hex("#009688")  # Primary color
         
         # Botón de recuperación - estilo text
         recovery_button = MDButton(
@@ -94,7 +96,7 @@ class LoginScreen(MDScreen):
         # MDCard con MDRelativeLayout interno - tarjeta más grande para evitar superposición
         card = MDCard(
             MDRelativeLayout(
-                # Primer label FIJADO ARRIBA - Título principal
+                # Primer label FIJADO ARRIBA - Título principal con color primario oscuro
                 MDLabel(
                     text="Sistema de Ventas",
                     halign="center",
@@ -103,7 +105,8 @@ class LoginScreen(MDScreen):
                     height=dp(40),
                     font_style="Headline",
                     role="large",
-                    theme_text_color="Primary",
+                    theme_text_color="Custom",
+                    text_color=get_color_from_hex("#00796b"),  # Dark primary color
                 ),
                 
                 # Segundo label (subtítulo) - posición ajustada para evitar superposición
@@ -113,7 +116,8 @@ class LoginScreen(MDScreen):
                     halign="center",
                     font_style="Body",
                     role="medium",
-                    theme_text_color="Secondary",
+                    theme_text_color="Custom",
+                    text_color=get_color_from_hex("#757575"),  # Secondary text
                     size_hint_y=None,
                     height=dp(24),
                 ),
@@ -139,6 +143,7 @@ class LoginScreen(MDScreen):
             size_hint=(None, None),
             size=(dp(420), dp(420)),  # Tarjeta más alta
             radius=[16, 16, 16, 16],
+            md_bg_color=get_color_from_hex("#FFFFFF"),  # Surface card
         )
         
         self.clear_widgets()

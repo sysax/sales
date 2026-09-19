@@ -6,6 +6,7 @@ MDScreenManager + MDNavigationLayout, MDTopAppBar p.7-11, MDNavigationDrawer*
 12 módulos fases.md + Dashboard + Usuarios
 """
 from kivy.metrics import dp
+from kivy.utils import get_color_from_hex
 from kivymd.uix.navigationdrawer import (
     MDNavigationDrawer,
     MDNavigationDrawerMenu,
@@ -87,17 +88,21 @@ def create_sidebar() -> MDNavigationDrawer:
                     role="large",
                     adaptive_height=True,
                     padding=("16dp", "16dp", "16dp", "4dp"),
+                    theme_text_color="Custom",
+                    text_color=get_color_from_hex("#FFFFFF"),
                 ),
                 MDLabel(
                     text="v1.0 - KivyMD 2.0.1",
                     font_style="Body",
                     role="medium",
-                    theme_text_color="Secondary",
+                    theme_text_color="Custom",
+                    text_color=get_color_from_hex("#E0E0E0"),
                     adaptive_height=True,
                     padding=("16dp", "0dp", "16dp", "16dp"),
                 ),
                 orientation="vertical",
                 adaptive_height=True,
+                md_bg_color=get_color_from_hex("#009688"),  # Primary color
             ),
             MDNavigationDrawerDivider(),
             MDNavigationDrawerLabel(text="Modulos"),
@@ -111,4 +116,5 @@ def create_sidebar() -> MDNavigationDrawer:
             ),
         ),
         radius=(0, dp(16), dp(16), 0),
+        md_bg_color=get_color_from_hex("#FFFFFF"),  # Surface card
     )
