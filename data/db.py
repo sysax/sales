@@ -156,24 +156,22 @@ def init_db(seed=True):
         last_error TEXT,
         synced_ts TEXT
     )""")
-    cur.execute("CREATE INDEX IF NOT EXISTS idx_outbox_status ON outbox(status)")
-    # Recuperación contraseña — tokens un solo uso con expiración
-    cur.execute("""CREATE TABLE IF NOT EXISTS recovery_tokens (
-        token TEXT PRIMARY KEY,
-        username TEXT,
-        created_ts TEXT,
-        expires_ts TEXT,
-        used INTEGER DEFAULT 0
-    )""")
-    # Ajustes app (DIAN OFF por defecto — data/dian.py)
-    cur.execute("""CREATE TABLE IF NOT EXISTS settings (
-        key TEXT PRIMARY KEY, value TEXT
-    )""")
-    cur.execute("INSERT OR IGNORE INTO settings (key, value) VALUES ('dian_enabled', '0')")
-    cur.execute("INSERT OR IGNORE INTO settings (key, value) VALUES ('dian_provider', 'simulado')")
-    conn.commit()
+    # Índices para mejorar performance de consultas frecuentes
+    # Se crean después de las migraciones para asegurar que las columnas existen
+    conn.commit()  # Commit inicial antes de índices
     _migrate_users(conn)
     _migrate_products(conn)
+    
+    # Crear índices (las migraciones aseguran que las columnas existen)
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_outbox_status ON outbox(status)")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_products_sku ON products(sku)")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_products_barcode ON products(barcode)")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_products_category ON products(cat)")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_sales_date ON sales(date)")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_sales_client ON sales(client)")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_users_username ON users(username)")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_clients_nit ON clients(nit)")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_inventory_movements_ts ON inventory_movements(ts)")
     if seed:
         _seed_if_empty(conn)
     conn.close()
