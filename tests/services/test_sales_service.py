@@ -44,7 +44,7 @@ class TestSalesService:
             {'product_id': 1, 'quantity': 2, 'price': 1000}
         ]
         
-        mock_repos['product_repo'].get_product.return_value = {
+        mock_repos['product_repo'].find_product.return_value = {
             'id': 1,
             'name': 'Producto Test',
             'sku': 'SKU-001',
@@ -85,7 +85,7 @@ class TestSalesService:
         # Setup
         items = [{'product_id': 1, 'quantity': 100}]
         
-        mock_repos['product_repo'].get_product.return_value = {
+        mock_repos['product_repo'].find_product.return_value = {
             'id': 1,
             'name': 'Producto Test',
             'price': 1000,
@@ -105,7 +105,7 @@ class TestSalesService:
         """Test que producto no existente lanza error"""
         # Setup
         items = [{'product_id': 999, 'quantity': 1}]
-        mock_repos['product_repo'].get_product.return_value = None
+        mock_repos['product_repo'].find_product.return_value = None
         
         # Execute & Assert
         with pytest.raises(BusinessValidationError):
@@ -122,26 +122,26 @@ class TestSalesService:
         mock_repos['product_repo'].get_product.return_value = {
             'id': 1,
             'name': 'Producto Test',
+            'sku': 'SKU-TEST-001',
             'price': 1000,
             'stock': 100,
             'tax': 19
         }
         
         mock_repos['sale_repo'].create_sale.return_value = 123
-        mock_repos['dian_service'].generate_invoice.return_value = {
-            'cufe': 'ABC123XYZ789'
-        }
         
         # Execute
         result = sales_service.create_sale(
             items=items,
             client_name='Cliente Test',
+            client_nit='123456789',
             is_electronic=True
         )
         
-        # Assert
-        assert result['cufe'] == 'ABC123XYZ789'
-        mock_repos['dian_service'].generate_invoice.assert_called_once()
+        # Assert - El CUFE se genera realmente con SHA-1, no es mockeado
+        assert result is not None
+        assert result['cufe'] is not None
+        assert len(result['cufe']) == 40  # SHA-1 tiene 40 caracteres hex
     
     def test_calculate_totals_correct(self, sales_service, mock_repos):
         """Test cálculo correcto de totales"""

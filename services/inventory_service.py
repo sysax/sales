@@ -37,7 +37,7 @@ class InventoryService:
         self.inventory_repo = inventory_repo or InventoryRepository()
         self.product_repo = product_repo or ProductRepository()
     
-    @handle_errors(default_return=None)
+    @handle_errors(default_return=None, raise_exceptions=True)
     def register_purchase(
         self,
         product_id: int,
@@ -113,7 +113,7 @@ class InventoryService:
             'new_cost': new_cost
         }
     
-    @handle_errors(default_return=None)
+    @handle_errors(default_return=None, raise_exceptions=True)
     def register_adjustment(
         self,
         product_id: int,
