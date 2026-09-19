@@ -102,7 +102,6 @@ def create_sidebar() -> MDNavigationDrawer:
                 ),
                 orientation="vertical",
                 adaptive_height=True,
-                md_bg_color=get_color_from_hex("#009688"),  # Primary color
             ),
             MDNavigationDrawerDivider(),
             MDNavigationDrawerLabel(text="Modulos"),

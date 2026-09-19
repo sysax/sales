@@ -26,4 +26,15 @@ htmlcov/
 # Python cache
 .mypy_cache/
 .pytest_cache/
+
+# ── Proyecto: base local (se regenera con seed al iniciar) ──
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# ── Proyecto: artefactos runtime (tickets, barcodes, kivy) ──
+data/tickets/
+barcodes/
+.kivy/
 ```
