@@ -1,43 +1,34 @@
-# ── Python ──
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-*.egg-info/
-dist/
-build/
-.eggs/
+```
+# Test coverage
+.coverage
 
-# ── Entornos virtuales ──
+# Dependencies
 .venv/
 venv/
-env/
-ENV/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-# ── Base de datos local (se regenera con seed al iniciar) ──
-*.db
-*.db-journal
-*.sqlite
-*.sqlite3
+# Build artifacts
+build/
+dist/
+*.egg-info/
 
-# ── Artefactos runtime del sistema (rutas /tmp y locales) ──
-/tmp/
-data/tickets/
-barcodes/
+# Logs and temp files
+*.log
+*.tmp
 
-# ── Kivy / KivyMD ──
-.kivy/
-*.kv.bak
+# Environment
+.env
+.env.local
+*.env.*
 
-# ── Sistema / editores ──
-.DS_Store
-Thumbs.db
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 
-# ── Logs ──
-*.log
-kivy_*.txt
+# Testing
+.pytest_cache/
+.mypy_cache/
+```
