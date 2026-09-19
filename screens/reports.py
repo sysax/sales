@@ -157,12 +157,12 @@ class ReportsScreen(MDScreen):
         content.add_widget(MDLabel(text="Operativos", font_style="Title", role="large", adaptive_height=True, padding=(0,"12dp",0,0)))
         op_grid = MDGridLayout(cols=2, spacing="10dp", adaptive_height=True, size_hint_x=1)
         for titulo, val, col in [
-            (f"Ventas día ({ventas_dia['count']} docs)", f"${ventas_dia['total']:,.0f} COP", "#4CAF50"),
-            (f"Ventas semana ({ventas_sem['count']})", f"${ventas_sem['total']:,.0f} COP", "#2196F3"),
-            (f"Ventas mes ({ventas_mes['count']})", f"${ventas_mes['total']:,.0f} COP", "#FF9800"),
-            (f"Ventas año ({ventas_anio['count']})", f"${ventas_anio['total']:,.0f} COP", "#9C27B0"),
-            ("Ticket promedio COP", f"${ticket:,.0f} COP", "#009688"),
-            ("Productos", f"{len(repo.list_products())} SKU", "#795548"),
+            (f"Ventas día ({ventas_dia['count']} docs)", f"${ventas_dia['total']:,.0f} COP", "#009688"),  # SUCCESS_BG
+            (f"Ventas semana ({ventas_sem['count']})", f"${ventas_sem['total']:,.0f} COP", "#03a9f4"),  # INFO_BG
+            (f"Ventas mes ({ventas_mes['count']})", f"${ventas_mes['total']:,.0f} COP", "#FFC107"),  # WARNING_BG
+            (f"Ventas año ({ventas_anio['count']})", f"${ventas_anio['total']:,.0f} COP", "#00796b"),  # Púrpura
+            ("Ticket promedio COP", f"${ticket:,.0f} COP", "#009688"),  # PRIMARY_COLOR
+            ("Productos", f"{len(repo.list_products())} SKU", "#757575"),  # Marrón
         ]:
             op_grid.add_widget(MDCard(MDLabel(text=titulo, font_style="Body", role="small", halign="center", adaptive_height=True), MDLabel(text=val, font_style="Title", role="medium", halign="center", theme_text_color="Custom", text_color=col, adaptive_height=True), orientation="vertical", padding="12dp", size_hint_y=None, height="90dp", style="elevated"))
         content.add_widget(op_grid)
@@ -191,12 +191,12 @@ class ReportsScreen(MDScreen):
         content.add_widget(MDLabel(text="Financieros", font_style="Title", role="large", adaptive_height=True, padding=(0,"12dp",0,0)))
         fin_grid = MDGridLayout(cols=2, spacing="10dp", adaptive_height=True, size_hint_x=1)
         for titulo, val, col in [
-            ("Ingresos (Pagada)", f"${estado['ingresos']:,.0f} COP", "#4CAF50"),
-            ("Costo ventas", f"${estado['costo']:,.0f} COP", "#F44336"),
-            ("Bruto", f"${estado['bruto']:,.0f} COP", "#2196F3"),
-            ("Impuestos IVA 19% DIAN", f"${impuestos['iva_19']:,.0f} COP", "#FF9800"),
-            ("Neto", f"${estado['neto']:,.0f} COP", "#9C27B0"),
-            ("Flujo neto", f"${flujo['neto']:,.0f} COP", "#009688"),
+            ("Ingresos (Pagada)", f"${estado['ingresos']:,.0f} COP", "#009688"),  # SUCCESS_BG
+            ("Costo ventas", f"${estado['costo']:,.0f} COP", "#F44336"),  # ERROR_BG
+            ("Bruto", f"${estado['bruto']:,.0f} COP", "#03a9f4"),  # INFO_BG
+            ("Impuestos IVA 19% DIAN", f"${impuestos['iva_19']:,.0f} COP", "#FFC107"),  # WARNING_BG
+            ("Neto", f"${estado['neto']:,.0f} COP", "#00796b"),  # Púrpura
+            ("Flujo neto", f"${flujo['neto']:,.0f} COP", "#009688"),  # PRIMARY_COLOR
         ]:
             fin_grid.add_widget(MDCard(MDLabel(text=titulo, font_style="Body", role="small", halign="center", adaptive_height=True), MDLabel(text=val, font_style="Title", role="medium", halign="center", theme_text_color="Custom", text_color=col, adaptive_height=True), orientation="vertical", padding="12dp", size_hint_y=None, height="90dp", style="elevated"))
         content.add_widget(fin_grid)
@@ -212,10 +212,10 @@ class ReportsScreen(MDScreen):
         content.add_widget(MDLabel(text="KPIs", font_style="Title", role="large", adaptive_height=True, padding=(0,"12dp",0,0)))
         kpi_grid = MDGridLayout(cols=2, spacing="10dp", adaptive_height=True, size_hint_x=1)
         for titulo, val, col in [
-            (f"Rotación inventario {kpis['rotacion']:.2f}x", f"Días {kpis['dias_inventario']:.0f} días", "#FF5722"),
-            (f"Tasa conversión {kpis['conversion']:.0f}%", f"Margen bruto {kpis['margen_bruto_pct']:.1f}%", "#3F51B5"),
-            (f"Margen neto {kpis['margen_neto_pct']:.1f}%", f"Punto equilibrio ${kpis['punto_equilibrio']:,.0f} COP", "#607D8B"),
-            ("Costos fijos mes", f"${kpis['costos_fijos']:,.0f} COP", "#795548"),
+            (f"Rotación inventario {kpis['rotacion']:.2f}x", f"Días {kpis['dias_inventario']:.0f} días", "#FFC107"),  # Naranja rojizo
+            (f"Tasa conversión {kpis['conversion']:.0f}%", f"Margen bruto {kpis['margen_bruto_pct']:.1f}%", "#00796b"),  # Índigo
+            (f"Margen neto {kpis['margen_neto_pct']:.1f}%", f"Punto equilibrio ${kpis['punto_equilibrio']:,.0f} COP", "#757575"),  # Azul gris
+            ("Costos fijos mes", f"${kpis['costos_fijos']:,.0f} COP", "#757575"),  # Marrón
         ]:
             kpi_grid.add_widget(MDCard(MDLabel(text=titulo, font_style="Body", role="small", halign="center", adaptive_height=True), MDLabel(text=val, font_style="Title", role="small", halign="center", theme_text_color="Custom", text_color=col, adaptive_height=True), orientation="vertical", padding="12dp", size_hint_y=None, height="85dp", style="elevated"))
         content.add_widget(kpi_grid)

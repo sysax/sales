@@ -29,7 +29,7 @@ class LoginScreen(MDScreen):
         super().__init__(**kwargs)
         self.name = "login"
         # Fondo con color primario claro de la paleta teal
-        self.md_bg_color = get_color_from_hex("#b2dfdb")  # Light primary color
+        self.md_bg_color = get_color_from_hex("#b2dfdb")  # LIGHT_PRIMARY
         
         self.user_field = None
         self.pass_field = None
@@ -79,7 +79,7 @@ class LoginScreen(MDScreen):
             on_release=self.do_login,
             radius=[8, 8, 8, 8],
         )
-        login_button.md_bg_color = get_color_from_hex("#009688")  # Primary color
+        login_button.md_bg_color = get_color_from_hex("#009688")  # PRIMARY_COLOR
         
         # Botón de recuperación - estilo text
         recovery_button = MDButton(
@@ -106,7 +106,7 @@ class LoginScreen(MDScreen):
                     font_style="Headline",
                     role="large",
                     theme_text_color="Custom",
-                    text_color=get_color_from_hex("#00796b"),  # Dark primary color
+                    text_color=get_color_from_hex("#00796b"),  # DARK_PRIMARY
                 ),
                 
                 # Segundo label (subtítulo) - posición ajustada para evitar superposición
@@ -117,7 +117,7 @@ class LoginScreen(MDScreen):
                     font_style="Body",
                     role="medium",
                     theme_text_color="Custom",
-                    text_color=get_color_from_hex("#757575"),  # Secondary text
+                    text_color=get_color_from_hex("#757575"),  # SECONDARY_TEXT
                     size_hint_y=None,
                     height=dp(24),
                 ),
@@ -143,7 +143,7 @@ class LoginScreen(MDScreen):
             size_hint=(None, None),
             size=(dp(420), dp(420)),  # Tarjeta más alta
             radius=[16, 16, 16, 16],
-            md_bg_color=get_color_from_hex("#FFFFFF"),  # Surface card
+            md_bg_color=get_color_from_hex("#FFFFFF"),  # SURFACE_CARD
         )
         
         self.clear_widgets()

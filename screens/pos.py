@@ -77,12 +77,12 @@ class POSScreen(MDScreen):
         # Labels COP
         self.lbl_items = MDLabel(text="Items: 0", font_style="Title", role="small", adaptive_height=True)
         self.lbl_subtotal = MDLabel(text="Subtotal: $0 COP", font_style="Body", role="small", adaptive_height=True)
-        self.lbl_discount = MDLabel(text="Descuento: $0 COP", font_style="Body", role="small", theme_text_color="Custom", text_color="#4CAF50", adaptive_height=True)
+        self.lbl_discount = MDLabel(text="Descuento: $0 COP", font_style="Body", role="small", theme_text_color="Custom", text_color="#009688", adaptive_height=True)  # SUCCESS_BG
         self.lbl_tax = MDLabel(text="IVA 19% DIAN: $0 COP", font_style="Body", role="small", theme_text_color="Secondary", adaptive_height=True)
-        self.lbl_total = MDLabel(text="$0 COP", font_style="Headline", role="large", halign="center", theme_text_color="Custom", text_color="#4CAF50", adaptive_height=True)
-        self.lbl_cambio = MDLabel(text="Cambio: $0 COP", font_style="Title", role="small", halign="center", theme_text_color="Custom", text_color="#FF9800", adaptive_height=True)
+        self.lbl_total = MDLabel(text="$0 COP", font_style="Headline", role="large", halign="center", theme_text_color="Custom", text_color="#009688", adaptive_height=True)  # SUCCESS_BG
+        self.lbl_cambio = MDLabel(text="Cambio: $0 COP", font_style="Title", role="small", halign="center", theme_text_color="Custom", text_color="#FFC107", adaptive_height=True)  # WARNING_BG
         self.lbl_caja = MDLabel(text="Caja: Cerrada", font_style="Body", role="small", halign="center", theme_text_color="Secondary", adaptive_height=True)
-        self.lbl_offline = MDLabel(text="Online", font_style="Body", role="small", halign="center", theme_text_color="Custom", text_color="#4CAF50", adaptive_height=True)
+        self.lbl_offline = MDLabel(text="Online", font_style="Body", role="small", halign="center", theme_text_color="Custom", text_color="#009688", adaptive_height=True)  # SUCCESS_BG
 
         self._build_products_grid()
         self._build_ui()
@@ -131,7 +131,7 @@ class POSScreen(MDScreen):
     def _make_product_card(self, product):
         return MDCard(
             MDLabel(text=product["name"], font_style="Title", role="small", adaptive_height=True),
-            MDLabel(text=f"${product['price']:,.2f}", font_style="Headline", role="medium", halign="center", theme_text_color="Custom", text_color="#2196F3", adaptive_height=True),
+            MDLabel(text=f"${product['price']:,.2f}", font_style="Headline", role="medium", halign="center", theme_text_color="Custom", text_color="#03a9f4", adaptive_height=True),  # INFO_BG (azul)
             MDLabel(text=f"Stock:{product['stock']} Promo:{'Sí' if product['sku']=='P005' else '-'}", font_style="Body", role="small", halign="center", theme_text_color="Secondary", adaptive_height=True),
             orientation="vertical", padding="12dp", size_hint_y=None, height="120dp",
             on_release=lambda x, p=product: self.add_to_cart(p["id"]),
@@ -180,10 +180,10 @@ class POSScreen(MDScreen):
         s = repo.get_caja_status()
         if s["open"]:
             self.lbl_caja.text = f"Caja ABIERTA por {s['opening_user']} ${s['opening_amount']:.0f} COP — ventas {len(s['sales_today'])} tot ${s['total_sales']:.0f} COP esperado ${s['expected']:.0f} COP"
-            self.lbl_caja.text_color = "#4CAF50"
+            self.lbl_caja.text_color = "#009688"  # SUCCESS_BG
         else:
             self.lbl_caja.text = "Caja CERRADA — abra caja para vender (Apertura)"
-            self.lbl_caja.text_color = "#F44336"
+            self.lbl_caja.text_color = "#F44336"  # ERROR_BG
 
     def _refresh_offline_status(self):
         online = offline_mod.is_online()
@@ -195,10 +195,10 @@ class POSScreen(MDScreen):
             dian_on = False
         if online:
             self.lbl_offline.text = f"● Online — cola {queued}" + (" — DIAN sincrónico" if dian_on else "")
-            self.lbl_offline.text_color = "#4CAF50"
+            self.lbl_offline.text_color = "#009688"  # SUCCESS_BG
         else:
             self.lbl_offline.text = f"● OFFLINE — cola {queued} — guardado local, sync pendiente"
-            self.lbl_offline.text_color = "#F44336"
+            self.lbl_offline.text_color = "#F44336"  # ERROR_BG
 
     def _toggle_offline(self):
         # switch manual: flag persistente en offline_mod (+ mock para compat)

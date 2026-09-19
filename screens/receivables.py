@@ -40,9 +40,9 @@ class ReceivablesScreen(MDScreen):
         # KPIs
         kpi = MDGridLayout(cols=3, spacing="12dp", adaptive_height=True, size_hint_x=1, padding="12dp")
         for title, val, color in [
-            ("Deuda total", f"${total_debt:,.0f}", "#F44336"),
-            ("Cuentas pendientes", str(len(rec)), "#FF9800"),
-            ("Vencidas mora>0", str(vencidas), "#9C27B0"),
+            ("Deuda total", f"${total_debt:,.0f}", "#F44336"),  # ERROR_BG
+            ("Cuentas pendientes", str(len(rec)), "#FFC107"),  # WARNING_BG
+            ("Vencidas mora>0", str(vencidas), "#00796b"),  # Púrpura
         ]:
             kpi.add_widget(MDCard(MDLabel(text=title, font_style="Title", role="small", halign="center", adaptive_height=True), MDLabel(text=val, font_style="Headline", role="small", halign="center", theme_text_color="Custom", text_color=color, adaptive_height=True), orientation="vertical", padding="12dp", size_hint_y=None, height="80dp", style="elevated"))
 

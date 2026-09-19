@@ -868,11 +868,11 @@ class Repository:
             data = [headers] + [[str(c) for c in r] for r in rows]
             t = Table(data, repeatRows=1)
             t.setStyle(TableStyle([
-                ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#1B5E20")),
+                ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#00796b")),
                 ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
                 ("FONTSIZE", (0, 0), (-1, -1), 9),
                 ("GRID", (0, 0), (-1, -1), 0.5, colors.grey),
-                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#F1F8E9")]),
+                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#b2dfdb")]),
             ]))
             return t
         if tipo == "operativo":

@@ -89,14 +89,14 @@ def create_sidebar() -> MDNavigationDrawer:
                     adaptive_height=True,
                     padding=("16dp", "16dp", "16dp", "4dp"),
                     theme_text_color="Custom",
-                    text_color=get_color_from_hex("#FFFFFF"),
+                    text_color=get_color_from_hex("#FFFFFF"),  # TEXT_ICONS
                 ),
                 MDLabel(
                     text="v1.0 - KivyMD 2.0.1",
                     font_style="Body",
                     role="medium",
                     theme_text_color="Custom",
-                    text_color=get_color_from_hex("#E0E0E0"),
+                    text_color=get_color_from_hex("#BDBDBD"),
                     adaptive_height=True,
                     padding=("16dp", "0dp", "16dp", "16dp"),
                 ),
@@ -115,5 +115,5 @@ def create_sidebar() -> MDNavigationDrawer:
             ),
         ),
         radius=(0, dp(16), dp(16), 0),
-        md_bg_color=get_color_from_hex("#FFFFFF"),  # Surface card
+        md_bg_color=get_color_from_hex("#FFFFFF"),  # SURFACE_CARD
     )
