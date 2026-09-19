@@ -44,6 +44,20 @@ ERROR_BG = "#F44336"              # Mantener rojo para error (estándar Material
 INFO = "#FFFFFF"
 INFO_BG = "#03a9f4"               # Accent color para info
 
+# Colores para dashboard - usando paleta especificada
+DASH_BLUE = "#00796b"              # Dark primary
+DASH_RED = "#009688"               # Primary
+DASH_GREEN = "#b2dfdb"             # Light primary
+DASH_INDIGO = "#00796b"            # Dark primary variant
+DASH_TEAL = "#009688"              # Primary variant
+DASH_LIME = "#b2dfdb"              # Light primary variant
+DASH_ORANGE = "#03a9f4"            # Accent
+DASH_SLATE = "#757575"             # Secondary text
+DASH_CRIMSON = "#00796b"           # Dark primary deep
+DASH_CYAN = "#03a9f4"              # Accent variant
+DASH_PINK = "#009688"              # Primary deep
+DASH_PURPLE = "#00796b"            # Dark primary rich
+
 
 def stat_card(color_hex, value, label, icon, on_release=None):
     """Tarjeta estadística con gradiente sutil y sombra."""
