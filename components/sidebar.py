@@ -19,6 +19,7 @@ from kivymd.uix.navigationdrawer import (
 )
 from kivymd.uix.label import MDLabel
 from kivymd.app import MDApp
+from components.theme import TEXT_ICONS, DIVIDER_COLOR, SURFACE_CARD
 
 
 def create_sidebar() -> MDNavigationDrawer:
@@ -89,14 +90,14 @@ def create_sidebar() -> MDNavigationDrawer:
                     adaptive_height=True,
                     padding=("16dp", "16dp", "16dp", "4dp"),
                     theme_text_color="Custom",
-                    text_color=get_color_from_hex("#FFFFFF"),  # TEXT_ICONS
+                    text_color=get_color_from_hex(TEXT_ICONS),
                 ),
                 MDLabel(
                     text="v1.0 - KivyMD 2.0.1",
                     font_style="Body",
                     role="medium",
                     theme_text_color="Custom",
-                    text_color=get_color_from_hex("#BDBDBD"),
+                    text_color=get_color_from_hex(DIVIDER_COLOR),
                     adaptive_height=True,
                     padding=("16dp", "0dp", "16dp", "16dp"),
                 ),
@@ -115,5 +116,5 @@ def create_sidebar() -> MDNavigationDrawer:
             ),
         ),
         radius=(0, dp(16), dp(16), 0),
-        md_bg_color=get_color_from_hex("#FFFFFF"),  # SURFACE_CARD
+        md_bg_color=get_color_from_hex(SURFACE_CARD),
     )

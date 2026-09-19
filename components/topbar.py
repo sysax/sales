@@ -11,6 +11,7 @@ from kivymd.uix.appbar import (
     MDTopAppBarTitle,
 )
 from kivymd.app import MDApp
+from components.theme import PRIMARY_COLOR
 
 
 def create_topbar(title: str) -> MDTopAppBar:
@@ -79,5 +80,5 @@ def create_topbar(title: str) -> MDTopAppBar:
         ),
         type="small",
     )
-    topbar.md_bg_color = get_color_from_hex("#009688")  # PRIMARY_COLOR
+    topbar.md_bg_color = get_color_from_hex(PRIMARY_COLOR)
     return topbar

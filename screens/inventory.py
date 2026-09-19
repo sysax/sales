@@ -20,7 +20,7 @@ from kivymd.uix.widget import MDWidget
 from kivymd.app import MDApp
 
 from components.topbar import create_topbar
-from components.theme import action_bar, flex_columns, SUCCESS_BG, INFO_BG, DARK_PRIMARY, ERROR_BG, WARNING_BG
+from components.theme import action_bar, flex_columns, SUCCESS_BG, INFO_BG, DARK_PRIMARY, ERROR_BG, WARNING_BG, PRIMARY_TEXT, SECONDARY_TEXT
 from data.repository import repo
 
 
@@ -143,8 +143,8 @@ class InventoryScreen(MDScreen):
         )
 
         inner = MDBoxLayout(
-            MDLabel(text="Inventario / Almacén", font_style="Headline", role="large", halign="center", adaptive_height=True),
-            MDLabel(text="Entradas (compras/devolucion cliente) · Salidas (ventas/merma/robos) · Transferencias · Ajustes con justificación · PEPS/Promedio", font_style="Body", role="small", halign="center", theme_text_color="Secondary", adaptive_height=True),
+            MDLabel(text="Inventario / Almacén", font_style="Headline", role="large", halign="center", adaptive_height=True, theme_text_color="Custom", text_color=DARK_PRIMARY),
+            MDLabel(text="Entradas (compras/devolucion cliente) · Salidas (ventas/merma/robos) · Transferencias · Ajustes con justificación · PEPS/Promedio", font_style="Body", role="small", halign="center", adaptive_height=True, theme_text_color="Custom", text_color=SECONDARY_TEXT),
             kpi,
             self.search_field,
             self.scanner_field,

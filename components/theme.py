@@ -66,13 +66,13 @@ def stat_card(color_hex, value, label, icon, on_release=None):
                 theme_text_color="Custom", text_color=get_color_from_hex(TEXT_ICONS),
                 adaptive_height=True),
         MDLabel(text=label, font_style="Body", role="medium",
-                theme_text_color="Custom", text_color=get_color_from_hex("#BDBDBD"),
+                theme_text_color="Custom", text_color=get_color_from_hex(DIVIDER_COLOR),
                 adaptive_height=True),
         orientation="vertical", spacing="4dp", adaptive_height=True,
         size_hint_x=0.7,
     )
     right = MDBoxLayout(
-        MDIcon(icon=icon, theme_text_color="Custom", text_color=get_color_from_hex("#BDBDBD"),
+        MDIcon(icon=icon, theme_text_color="Custom", text_color=get_color_from_hex(DIVIDER_COLOR),
                font_size="48sp", halign="right", valign="middle"),
         size_hint_x=0.3,
     )
