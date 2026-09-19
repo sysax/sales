@@ -38,9 +38,9 @@ class PayablesScreen(MDScreen):
         total = sum(p.get("balance", p["amount"]) for p in pay)
         kpi = MDGridLayout(cols=3, spacing="12dp", adaptive_height=True, size_hint_x=1, padding="12dp")
         for title, val, color in [
-            ("Deuda proveedores", f"${total:,.0f}", "#F44336"),
-            ("Facturas pendientes", str(len(pay)), "#FF9800"),
-            ("Con pronto pago", str(sum(1 for p in pay if p.get("discount_early",0)>0)), "#4CAF50"),
+            ("Deuda proveedores", f"${total:,.0f}", "#F44336"),  # ERROR_BG
+            ("Facturas pendientes", str(len(pay)), "#FFC107"),  # WARNING_BG
+            ("Con pronto pago", str(sum(1 for p in pay if p.get("discount_early",0)>0)), "#009688"),  # SUCCESS_BG
         ]:
             kpi.add_widget(MDCard(MDLabel(text=title, font_style="Title", role="small", halign="center", adaptive_height=True), MDLabel(text=val, font_style="Headline", role="small", halign="center", theme_text_color="Custom", text_color=color, adaptive_height=True), orientation="vertical", padding="12dp", size_hint_y=None, height="80dp", style="elevated"))
 

@@ -43,10 +43,10 @@ class PurchasesScreen(MDScreen):
         low = repo.low_stock_products(10)
         kpi = MDGridLayout(cols=4, spacing="12dp", adaptive_height=True, size_hint_x=1, padding="12dp")
         for title, val, color in [
-            ("Pendiente", str(pending), "#FF9800"),
-            ("En tránsito", str(transit), "#2196F3"),
-            ("Recibida", str(received), "#4CAF50"),
-            (f"Stock bajo {len(low)}", ", ".join([p["sku"] for p in low[:2]]) or "OK", "#F44336" if low else "#4CAF50"),
+            ("Pendiente", str(pending), "#FFC107"),  # WARNING_BG
+            ("En tránsito", str(transit), "#03a9f4"),  # INFO_BG (azul)
+            ("Recibida", str(received), "#009688"),  # SUCCESS_BG
+            (f"Stock bajo {len(low)}", ", ".join([p["sku"] for p in low[:2]]) or "OK", "#F44336" if low else "#009688"),  # ERROR_BG / SUCCESS_BG
         ]:
             kpi.add_widget(MDCard(
                 MDLabel(text=title, font_style="Title", role="small", adaptive_height=True, halign="center"),

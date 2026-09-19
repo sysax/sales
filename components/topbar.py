@@ -79,5 +79,5 @@ def create_topbar(title: str) -> MDTopAppBar:
         ),
         type="small",
     )
-    topbar.md_bg_color = get_color_from_hex("#009688")  # Primary color
+    topbar.md_bg_color = get_color_from_hex("#009688")  # PRIMARY_COLOR
     return topbar

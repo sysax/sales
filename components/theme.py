@@ -17,10 +17,10 @@ from kivymd.uix.card import MDCard
 from kivymd.uix.label import MDLabel, MDIcon
 
 # ── Paleta Material Design Teal ──
-PRIMARY_COLOR = "#009688"         # Primary color - teal
+PRIMARY_COLOR = "#009688"         # Primary color
 LIGHT_PRIMARY = "#b2dfdb"         # Light primary color
 DARK_PRIMARY = "#00796b"          # Dark primary color
-ACCENT_COLOR = "#03a9f4"          # Accent color - light blue
+ACCENT_COLOR = "#03a9f4"          # Accent color
 
 # Text & Icons
 TEXT_ICONS = "#FFFFFF"            # Text / Icons on colored backgrounds
@@ -34,29 +34,15 @@ SURFACE_CARD = "#FFFFFF"          # tarjetas
 BACKGROUND_GRADIENT_START = "#FAFAFA"
 BACKGROUND_GRADIENT_END = "#EEEEEE"
 
-# Estados con mejor contraste
+# Estados con mejor contraste - usando paleta especificada
 SUCCESS = "#FFFFFF"
-SUCCESS_BG = "#4CAF50"
+SUCCESS_BG = "#009688"            # Primary color para éxito
 WARNING = "#FFFFFF"
-WARNING_BG = "#FFC107"
+WARNING_BG = "#FFC107"            # Mantener amarillo para warning (estándar Material)
 ERROR = "#FFFFFF"
-ERROR_BG = "#F44336"
+ERROR_BG = "#F44336"              # Mantener rojo para error (estándar Material)
 INFO = "#FFFFFF"
-INFO_BG = "#2196F3"
-
-# ── Paleta dashboard teal/azul ──
-DASH_BLUE = "#03a9f4"       # ventas - accent blue
-DASH_RED = "#ef5350"        # compras - red
-DASH_GREEN = "#66bb6a"      # ganancias - green
-DASH_INDIGO = "#5c6bc0"     # productos - indigo
-DASH_TEAL = "#009688"       # clientes - primary teal
-DASH_LIME = "#9ccc65"       # proveedores - lime
-DASH_ORANGE = "#ffa726"     # alertas - orange
-DASH_SLATE = "#78909c"      # histórico - blue grey
-DASH_CRIMSON = "#ec407a"    # por vencer - pink
-DASH_CYAN = "#26c6da"       # créditos - cyan
-DASH_PINK = "#ab47bc"       # promociones - purple
-DASH_PURPLE = "#7e57c2"     # usuarios - deep purple
+INFO_BG = "#03a9f4"               # Accent color para info
 
 
 def stat_card(color_hex, value, label, icon, on_release=None):
@@ -66,13 +52,13 @@ def stat_card(color_hex, value, label, icon, on_release=None):
                 theme_text_color="Custom", text_color=get_color_from_hex(TEXT_ICONS),
                 adaptive_height=True),
         MDLabel(text=label, font_style="Body", role="medium",
-                theme_text_color="Custom", text_color=get_color_from_hex("#E0E0E0"),
+                theme_text_color="Custom", text_color=get_color_from_hex("#BDBDBD"),
                 adaptive_height=True),
         orientation="vertical", spacing="4dp", adaptive_height=True,
         size_hint_x=0.7,
     )
     right = MDBoxLayout(
-        MDIcon(icon=icon, theme_text_color="Custom", text_color=get_color_from_hex("#E0E0E0"),
+        MDIcon(icon=icon, theme_text_color="Custom", text_color=get_color_from_hex("#BDBDBD"),
                font_size="48sp", halign="right", valign="middle"),
         size_hint_x=0.3,
     )
