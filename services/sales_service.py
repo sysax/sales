@@ -39,14 +39,14 @@ class SalesService:
         sale_repo: SaleRepository = None,
         inventory_repo: InventoryRepository = None,
         product_repo: ProductRepository = None,
-        dian_module=None
+        dian_service=None
     ):
         self.sale_repo = sale_repo or SaleRepository()
         self.inventory_repo = inventory_repo or InventoryRepository()
         self.product_repo = product_repo or ProductRepository()
-        self.dian_service = dian_module or dian_service
+        self.dian_service = dian_service or dian_service
     
-    @handle_errors(default_return=None)
+    @handle_errors(default_return=None, raise_exceptions=True)
     def create_sale(
         self,
         items: List[Dict[str, Any]],
@@ -93,7 +93,7 @@ class SalesService:
             quantity = item.get('quantity', 1)
             
             # Obtener producto
-            product = self.product_repo.get_product(product_id)
+            product = self.product_repo.find_product(product_id)
             if not product:
                 raise BusinessValidationError(f"Producto ID {product_id} no existe")
             
@@ -177,13 +177,14 @@ class SalesService:
         if is_electronic:
             try:
                 # Usar la función generate_cufe del módulo dian
-                from data.dian import generate_cufe, default_doc_type
+                from data.dian import generate_cufe
                 folio = f"VENTA-{sale_id:06d}"
                 cufe = generate_cufe(
                     folio=folio,
                     fecha=sale_data['date'],
                     total=float(total),
-                    doc_type=default_doc_type()
+                    nit_emisor='900123456',  # NIT emisor por defecto
+                    nit_receptor=client_nit or '0'
                 )
                 logger.info(f"Documento DIAN generado con CUFE: {cufe}")
             except Exception as e:
@@ -237,7 +238,7 @@ class SalesService:
         """
         return self.sale_repo.get_sales_by_date(start_date, end_date, user_id)
     
-    @handle_errors(default_return=None)
+    @handle_errors(default_return=None, raise_exceptions=True)
     def cancel_sale(self, sale_id: int, reason: str, user_id: int = None) -> bool:
         """
         Cancelar una venta y revertir inventario
@@ -292,7 +293,7 @@ class SalesService:
         total_discount = Decimal('0')
         
         for item in items:
-            product = self.product_repo.get_product(item.get('product_id'))
+            product = self.product_repo.find_product(item.get('product_id'))
             if not product:
                 continue
             

@@ -38,13 +38,14 @@ class PermissionDeniedError(Exception):
     pass
 
 
-def handle_errors(default_return=None, show_user_error=True):
+def handle_errors(default_return=None, show_user_error=True, raise_exceptions=False):
     """
     Decorador para manejo consistente de errores
     
     Args:
         default_return: Valor a retornar en caso de error
         show_user_error: Si True, muestra mensaje al usuario
+        raise_exceptions: Si True, re-lanza las excepciones (útil para tests)
     
     Usage:
         @handle_errors(default_return=[])
@@ -61,30 +62,40 @@ def handle_errors(default_return=None, show_user_error=True):
                 logger.warning(f"Error de validación [{func.__name__}]: {e}")
                 if show_user_error and len(args) > 0 and hasattr(args[0], '_snack'):
                     args[0]._snack(str(e))
+                if raise_exceptions:
+                    raise
                 return default_return
             
             except DatabaseError as e:
                 logger.error(f"Error de BD [{func.__name__}]: {e}", exc_info=True)
                 if show_user_error and len(args) > 0 and hasattr(args[0], '_snack'):
                     args[0]._snack("Error de base de datos. Intente nuevamente.")
+                if raise_exceptions:
+                    raise
                 return default_return
             
             except AuthenticationError as e:
                 logger.warning(f"Error de autenticación [{func.__name__}]: {e}")
                 if show_user_error and len(args) > 0 and hasattr(args[0], '_snack'):
                     args[0]._snack("Error de autenticación. Verifique sus credenciales.")
+                if raise_exceptions:
+                    raise
                 return default_return
             
             except PermissionDeniedError as e:
                 logger.warning(f"Permiso denegado [{func.__name__}]: {e}")
                 if show_user_error and len(args) > 0 and hasattr(args[0], '_snack'):
                     args[0]._snack("Acceso denegado. No tiene permisos para esta acción.")
+                if raise_exceptions:
+                    raise
                 return default_return
             
             except Exception as e:
                 logger.critical(f"Error inesperado [{func.__name__}]: {e}", exc_info=True)
                 if show_user_error and len(args) > 0 and hasattr(args[0], '_snack'):
                     args[0]._snack("Error interno del sistema. Contacte al administrador.")
+                if raise_exceptions:
+                    raise
                 return default_return
         
         return wrapper
