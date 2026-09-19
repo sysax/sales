@@ -5,9 +5,30 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Tests
+# Testing
 .pytest_cache/
+.coverage
+coverage/
+htmlcov/
 
 # Logs
 *.log
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+.venv/
+venv/
 ```
