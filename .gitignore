@@ -1,9 +1,13 @@
-```
 # Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
 
 # Dependencies
 .venv/
@@ -22,4 +26,21 @@ env/
 # Editors
 .vscode/
 .idea/
-```
+*.swp
+*.swo
+*~
+
+# Sistema / OS
+.DS_Store
+Thumbs.db
+
+# ── Proyecto: base local (se regenera con seed al iniciar) ──
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# ── Proyecto: artefactos runtime (tickets, barcodes, kivy) ──
+data/tickets/
+barcodes/
+.kivy/
