@@ -54,17 +54,17 @@ class SalesScreen(MDScreen):
         self.table = MDDataTable(
             size_hint=(1, None), height="380dp", use_pagination=True, rows_num=8,
             column_data=flex_columns(1200,
-                ("Folio", 1),
-                ("Fecha", 1.2),
-                ("Cliente", 2),
-                ("Doc", 1),
-                ("Estado", 1.2),
-                ("Total", 1.2),
-                ("Saldo", 1.2),
-                ("Pago", 1.4),
+                ("Folio", 1.1),
+                ("Fecha", 1.3),
+                ("Cliente", 2.2),
+                ("Doc", 1.1),
+                ("Estado", 1.3),
+                ("Total", 1.4),
+                ("Saldo", 1.3),
+                ("Pago", 1.5),
             ),
             row_data=[
-                (s["id"], s["date"], s["client"][:12], s.get("doc_type","Factura")[:7], s.get("estado", s["status"])[:9], f"${s['total']:,.0f}", f"${s.get('balance',0):,.0f}", (s.get("payment","")[:12] or "-"))
+                (s["id"], s["date"], s["client"][:16], s.get("doc_type","Factura")[:9], s.get("estado", s["status"])[:11], f"${s['total']:,.0f}", f"${s.get('balance',0):,.0f}", (s.get("payment","")[:16] or "-"))
                 for s in sales
             ],
         )

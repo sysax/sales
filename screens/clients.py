@@ -41,17 +41,17 @@ class ClientsScreen(MDScreen):
             use_pagination=True,
             rows_num=8,
             column_data=flex_columns(1200,
-                ("ID", 0.5),
-                ("Nombre", 2),
-                ("NIT", 1.4),
-                ("Email", 2.2),
-                ("Telefono", 1.3),
-                ("Ciudad", 1.2),
-                ("Credito COP", 1.4),
-                ("Desc%", 0.8),
+                ("ID", 0.6),
+                ("Nombre", 2.2),
+                ("NIT", 1.5),
+                ("Email", 2.4),
+                ("Telefono", 1.4),
+                ("Ciudad", 1.3),
+                ("Credito COP", 1.5),
+                ("Desc%", 0.9),
             ),
             row_data=[
-                (str(c["id"]), c["name"][:14], c.get("nit", c.get("rfc",""))[:12], c["email"][:18], c["phone"], c["city"], f"${c.get('credit',0):,.0f}", str(c.get("discount",0)))
+                (str(c["id"]), c["name"][:18], c.get("nit", c.get("rfc",""))[:14], c["email"][:22], c["phone"][:12], c["city"][:12], f"${c.get('credit',0):,.0f}", str(c.get("discount",0)))
                 for c in clients
             ],
         )

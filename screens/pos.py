@@ -67,10 +67,10 @@ class POSScreen(MDScreen):
         self.cart_table = MDDataTable(
             size_hint=(1, None), height="200dp", use_pagination=False,
             column_data=flex_columns(760,
-                ("Producto", 2.4),
-                ("Precio", 1.2),
-                ("Cant", 0.8),
-                ("Subtotal", 1.4),
+                ("Producto", 2.8),
+                ("Precio", 1.4),
+                ("Cant", 1),
+                ("Subtotal", 1.6),
             ),
             row_data=[],
         )

@@ -1,6 +1,7 @@
 """
-Pantalla de Login refactorizada.
+Pantalla de Login refactorizada - Interfaz mejorada.
 Ref: mdcard_03.py - Uso de MDRelativeLayout con posicionamiento absoluto
+Mejoras: Componentes no superpuestos, botones uniformes, paleta vibrante
 """
 from kivy.metrics import dp
 from kivymd.uix.screen import MDScreen
@@ -26,7 +27,8 @@ class LoginScreen(MDScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.name = "login"
-        self.md_bg_color = self.theme_cls.backgroundColor
+        # Fondo con color vibrante suave
+        self.md_bg_color = [0.96, 0.97, 0.99, 1]  # Blanco azulado muy claro
         
         self.user_field = None
         self.pass_field = None
@@ -40,7 +42,7 @@ class LoginScreen(MDScreen):
     def _build_ui(self):
         """Construye la UI usando MDRelativeLayout con posicionamiento absoluto."""
         
-        # Campos de texto
+        # Campos de texto - altura uniforme
         self.user_field = MDTextField(
             MDTextFieldLeadingIcon(icon="account"),
             MDTextFieldHintText(text="Usuario"),
@@ -48,7 +50,8 @@ class LoginScreen(MDScreen):
             mode="outlined",
             size_hint_x=1,
             size_hint_y=None,
-            height="60dp",
+            height=dp(56),
+            radius=[8, 8, 8, 8],
         )
         
         self.pass_field = MDTextField(
@@ -59,75 +62,86 @@ class LoginScreen(MDScreen):
             password=True,
             size_hint_x=1,
             size_hint_y=None,
-            height="60dp",
+            height=dp(56),
+            radius=[8, 8, 8, 8],
         )
         
-        # MDCard con MDRelativeLayout interno
+        # Botón de login - estilo filled
+        login_button = MDButton(
+            MDButtonText(text="Iniciar sesión"),
+            style="filled",
+            theme_width="Custom",
+            size_hint_x=1,
+            size_hint_y=None,
+            height=dp(50),
+            pos_hint={"center_x": 0.5},
+            on_release=self.do_login,
+            radius=[8, 8, 8, 8],
+        )
+        
+        # Botón de recuperación - estilo text
+        recovery_button = MDButton(
+            MDButtonText(text="¿Olvidaste tu contraseña?"),
+            style="text",
+            theme_width="Custom",
+            size_hint_x=1,
+            size_hint_y=None,
+            height=dp(40),
+            pos_hint={"center_x": 0.5},
+            on_release=self.open_recovery,
+        )
+        
+        # MDCard con MDRelativeLayout interno - tarjeta más grande para evitar superposición
         card = MDCard(
             MDRelativeLayout(
-                # Primer label FIJADO ARRIBA
+                # Primer label FIJADO ARRIBA - Título principal
                 MDLabel(
                     text="Sistema de Ventas",
                     halign="center",
                     pos_hint={"top": 1, "center_x": 0.5},
                     size_hint_y=None,
-                    height="32dp",
+                    height=dp(40),
                     font_style="Headline",
                     role="large",
+                    theme_text_color="Primary",
                 ),
                 
-                # Segundo label (subtítulo)
+                # Segundo label (subtítulo) - posición ajustada para evitar superposición
                 MDLabel(
                     text="Inicia sesión para continuar",
-                    pos_hint={"top": 0.85, "center_x": 0.5},
+                    pos_hint={"top": 0.88, "center_x": 0.5},
                     halign="center",
                     font_style="Body",
                     role="medium",
                     theme_text_color="Secondary",
                     size_hint_y=None,
-                    height="20dp",
+                    height=dp(24),
                 ),
                 
-                # BoxLayout para los campos y botón
+                # BoxLayout para los campos y botón - espaciado mejorado
                 MDBoxLayout(
                     self.user_field,
                     self.pass_field,
-                    MDButton(
-                        MDButtonText(text="Iniciar sesión"),
-                        style="filled",
-                        theme_width="Custom",
-                        size_hint_x=1,
-                        size_hint_y=None,
-                        height="48dp",
-                        pos_hint={"center_x": 0.5},
-                        on_release=self.do_login,
-                    ),
-                    MDButton(
-                        MDButtonText(text="¿Olvidaste tu contraseña?"),
-                        style="text",
-                        theme_width="Custom",
-                        size_hint_x=1,
-                        size_hint_y=None,
-                        height="36dp",
-                        pos_hint={"center_x": 0.5},
-                        on_release=self.open_recovery,
-                    ),
+                    login_button,
+                    recovery_button,
                     orientation="vertical",
-                    spacing="8dp",
-                    pos_hint={"center_x": 0.5, "center_y": 0.38},
-                    size_hint=(0.9, None),
-                    height="260dp",
-                    padding=("16dp", "0dp", "16dp", "0dp"),
+                    spacing=dp(12),  # Espacio entre elementos aumentado
+                    pos_hint={"center_x": 0.5, "center_y": 0.35},  # Posición vertical ajustada
+                    size_hint=(0.85, None),  # Ancho reducido para mejor margen
+                    height=dp(280),  # Altura aumentada para acomodar todo
+                    padding=(dp(20), dp(10), dp(20), dp(10)),
                 ),
             ),
-            # Propiedades de la tarjeta
+            # Propiedades de la tarjeta - más grande para evitar superposición
             style="elevated",
             pos_hint={"center_x": 0.5, "center_y": 0.5},
-            padding="4dp",
+            padding=dp(20),
             size_hint=(None, None),
-            size=("480dp", "360dp"),
+            size=(dp(420), dp(420)),  # Tarjeta más alta
+            radius=[16, 16, 16, 16],
         )
         
+        self.clear_widgets()
         self.add_widget(card)
     
     def do_login(self, *args):

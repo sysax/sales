@@ -40,16 +40,16 @@ class SuppliersScreen(MDScreen):
             use_pagination=True,
             rows_num=8,
             column_data=flex_columns(1100,
-                ("ID", 0.5),
-                ("Empresa", 2.2),
-                ("NIT", 1.4),
-                ("Contacto", 1.8),
-                ("Telefono", 1.3),
-                ("Ciudad", 1.2),
-                ("Entrega", 1.1),
+                ("ID", 0.6),
+                ("Empresa", 2.4),
+                ("NIT", 1.5),
+                ("Contacto", 1.9),
+                ("Telefono", 1.4),
+                ("Ciudad", 1.3),
+                ("Entrega", 1.3),
             ),
             row_data=[
-                (str(s["id"]), s["name"][:14], s.get("nit", s.get("rfc",""))[:12], s["contact"][:14], s["phone"], s["city"], s.get("lead_time",""))
+                (str(s["id"]), s["name"][:18], s.get("nit", s.get("rfc",""))[:14], s["contact"][:18], s["phone"][:12], s["city"][:12], s.get("lead_time","")[:12])
                 for s in suppliers
             ],
         )

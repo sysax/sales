@@ -58,22 +58,22 @@ class ProductsScreen(MDScreen):
         self.table = MDDataTable(
             size_hint=(1, None), height="340dp", use_pagination=True, rows_num=7,
             column_data=flex_columns(1150,
-                ("SKU", 1),
-                ("Producto", 2.2),
-                ("Cat", 1.3),
-                ("Precio COP", 1.3),
-                ("Stock", 0.8),
+                ("SKU", 1.2),
+                ("Producto", 2.5),
+                ("Cat", 1.1),
+                ("Precio COP", 1.4),
+                ("Stock", 0.9),
                 ("Lote", 1),
-                ("Vence", 1.3),
+                ("Vence", 1.2),
                 ("Estado", 1.3),
             ),
             row_data=[
                 (
-                    p["sku"], p["name"][:14], p["cat"][:8],
+                    p["sku"], p["name"][:18], p["cat"][:10],
                     f"${p['price']:,.0f}", str(p["stock"]),
-                    (p.get("lote") or "")[:8],
+                    (p.get("lote") or "")[:10],
                     (p.get("vencimiento") or "")[:10],
-                    _estado(p)[:10],
+                    _estado(p)[:12],
                 ) for p in products
             ],
         )
