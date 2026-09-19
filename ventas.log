@@ -1,0 +1,8 @@
+2026-09-19 18:59:33,113 - utils.error_handler - WARNING - Error de validación [test_business_error]: Validation failed
+2026-09-19 18:59:33,113 - utils.error_handler - ERROR - Error de BD [test_db_error]: Database connection failed
+Traceback (most recent call last):
+  File "/workspace/utils/error_handler.py", line 58, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 20, in test_db_error
+utils.error_handler.DatabaseError: Database connection failed
