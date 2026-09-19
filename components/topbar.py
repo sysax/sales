@@ -2,6 +2,7 @@
 TopAppBar reutilizable para todas las pantallas autenticadas.
 Ref: kivymd-reference.md - kivymd.uix.appbar.appbar — + indicador offline Colombia
 """
+from kivy.utils import get_color_from_hex
 from kivymd.uix.appbar import (
     MDTopAppBar,
     MDTopAppBarLeadingButtonContainer,
@@ -62,7 +63,7 @@ def create_topbar(title: str) -> MDTopAppBar:
             except Exception:
                 pass
 
-    return MDTopAppBar(
+    topbar = MDTopAppBar(
         MDTopAppBarLeadingButtonContainer(
             MDActionTopAppBarButton(
                 icon="menu",
@@ -78,3 +79,5 @@ def create_topbar(title: str) -> MDTopAppBar:
         ),
         type="small",
     )
+    topbar.md_bg_color = get_color_from_hex("#009688")  # Primary color
+    return topbar

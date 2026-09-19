@@ -1,46 +1,29 @@
-# Python
-__pycache__/
+```
+# Compiled Python files
 *.pyc
-*.pyo
-*.pyd
-*.so
-*.egg-info/
-dist/
-build/
-.eggs/
+__pycache__/
 
-# Dependencies
-.venv/
+# Virtual environments
 venv/
-env/
-
-# Logs and temp files
-*.log
-*.tmp
-
-# Environment
+.venv/
 .env
-.env.local
-*.env.*
+*.env
 
-# Editors
+# IDE specific files
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
 
-# Sistema / OS
-.DS_Store
-Thumbs.db
+# Logs
+*.log
 
-# ── Proyecto: base local (se regenera con seed al iniciar) ──
-*.db
-*.db-journal
-*.sqlite
-*.sqlite3
+# Coverage reports
+.coverage
+coverage/
+htmlcov/
 
-# ── Proyecto: artefactos runtime (tickets, barcodes, kivy) ──
-data/tickets/
-barcodes/
-.kivy/
+# Python cache
+.mypy_cache/
+.pytest_cache/
+```
