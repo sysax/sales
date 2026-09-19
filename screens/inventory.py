@@ -77,18 +77,18 @@ class InventoryScreen(MDScreen):
         self.table = MDDataTable(
             size_hint=(1, None), height="340dp", use_pagination=True, rows_num=8,
             column_data=flex_columns(1150,
-                ("SKU", 1),
-                ("Producto", 2.2),
-                ("Stock", 0.9),
-                ("Min", 0.8),
-                ("Max", 0.8),
-                ("Ubicacion", 1.2),
+                ("SKU", 1.2),
+                ("Producto", 2.5),
+                ("Stock", 1),
+                ("Min", 0.9),
+                ("Max", 0.9),
+                ("Ubicacion", 1.3),
                 ("Estado", 1.2),
-                ("Valor costo", 1.4),
+                ("Valor costo", 1.6),
             ),
             row_data=[
                 (
-                    p["sku"], p["name"][:14], str(p["stock"]), str(p.get("stock_min",5)), str(p.get("stock_max",50)), p.get("location",""), _estado(p), f"${p.get('price_buy',0)*p['stock']:,.0f}"
+                    p["sku"], p["name"][:18], str(p["stock"]), str(p.get("stock_min",5)), str(p.get("stock_max",50)), p.get("location","")[:12], _estado(p), f"${p.get('price_buy',0)*p['stock']:,.0f}"
                 )
                 for p in products
             ],
@@ -128,16 +128,16 @@ class InventoryScreen(MDScreen):
         self.mov_table = MDDataTable(
             size_hint=(1, None), height="260dp", use_pagination=False,
             column_data=flex_columns(1050,
-                ("Fecha", 1.6),
-                ("SKU", 0.9),
-                ("Tipo", 1.3),
-                ("Cant", 0.8),
-                ("Antes→Después", 1.4),
-                ("Motivo", 2.2),
-                ("Usuario", 1.1),
+                ("Fecha", 1.8),
+                ("SKU", 1),
+                ("Tipo", 1.4),
+                ("Cant", 0.9),
+                ("Antes→Después", 1.6),
+                ("Motivo", 2.4),
+                ("Usuario", 1.2),
             ),
             row_data=[
-                (m["ts"], m["sku"], m["type"], f"{m['qty']:+d}", f"{m['before']}→{m['after']}", m["reason"][:18], m["user"])
+                (m["ts"], m["sku"], m["type"], f"{m['qty']:+d}", f"{m['before']}→{m['after']}", m["reason"][:22], m["user"])
                 for m in movements
             ],
         )

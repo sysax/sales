@@ -39,15 +39,15 @@ class PromosScreen(MDScreen):
         self.table = MDDataTable(
             size_hint=(1, None), height="380dp", use_pagination=True, rows_num=8,
             column_data=flex_columns(1050,
-                ("ID", 0.5),
-                ("Nombre", 2.4),
+                ("ID", 0.6),
+                ("Nombre", 2.6),
                 ("Tipo", 1.4),
-                ("Valor", 1),
-                ("Condición", 1.8),
-                ("Código", 1.2),
-                ("Activa", 0.9),
+                ("Valor", 1.1),
+                ("Condición", 2),
+                ("Código", 1.3),
+                ("Activa", 1),
             ),
-            row_data=[(str(p["id"]), p["name"][:18], p["type"], str(p["value"]), p.get("condition","")[:14], p.get("code",""), "Sí" if p["active"] else "No") for p in promos],
+            row_data=[(str(p["id"]), p["name"][:22], p["type"], str(p["value"]), p.get("condition","")[:18], p.get("code","")[:12], "Sí" if p["active"] else "No") for p in promos],
         )
         self.search_field = MDTextField(MDTextFieldLeadingIcon(icon="magnify"), MDTextFieldHintText(text="Buscar nombre / tipo / código..."), mode="outlined", size_hint_x=1)
         self.search_field.bind(text=self.on_search)
