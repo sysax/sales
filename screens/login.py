@@ -3,6 +3,9 @@ Pantalla de Login refactorizada - Interfaz mejorada.
 Ref: mdcard_03.py - Uso de MDRelativeLayout con posicionamiento absoluto
 Mejoras: Componentes no superpuestos, botones uniformes, paleta Material Design Teal
 """
+from components.theme import (
+    DARK_PRIMARY, LIGHT_PRIMARY, PRIMARY_COLOR, SECONDARY_TEXT, SURFACE_CARD
+)
 from kivy.metrics import dp
 from kivy.utils import get_color_from_hex
 from kivymd.uix.screen import MDScreen
@@ -29,7 +32,7 @@ class LoginScreen(MDScreen):
         super().__init__(**kwargs)
         self.name = "login"
         # Fondo con color primario claro de la paleta teal
-        self.md_bg_color = get_color_from_hex("#b2dfdb")  # LIGHT_PRIMARY
+        self.md_bg_color = get_color_from_hex(LIGHT_PRIMARY)
         
         self.user_field = None
         self.pass_field = None
@@ -79,7 +82,7 @@ class LoginScreen(MDScreen):
             on_release=self.do_login,
             radius=[8, 8, 8, 8],
         )
-        login_button.md_bg_color = get_color_from_hex("#009688")  # PRIMARY_COLOR
+        login_button.md_bg_color = get_color_from_hex(PRIMARY_COLOR)
         
         # Botón de recuperación - estilo text
         recovery_button = MDButton(
@@ -106,7 +109,7 @@ class LoginScreen(MDScreen):
                     font_style="Headline",
                     role="large",
                     theme_text_color="Custom",
-                    text_color=get_color_from_hex("#00796b"),  # DARK_PRIMARY
+                    text_color=get_color_from_hex(DARK_PRIMARY),
                 ),
                 
                 # Segundo label (subtítulo) - posición ajustada para evitar superposición
@@ -117,7 +120,7 @@ class LoginScreen(MDScreen):
                     font_style="Body",
                     role="medium",
                     theme_text_color="Custom",
-                    text_color=get_color_from_hex("#757575"),  # SECONDARY_TEXT
+                    text_color=get_color_from_hex(SECONDARY_TEXT),
                     size_hint_y=None,
                     height=dp(24),
                 ),
@@ -143,7 +146,7 @@ class LoginScreen(MDScreen):
             size_hint=(None, None),
             size=(dp(420), dp(420)),  # Tarjeta más alta
             radius=[16, 16, 16, 16],
-            md_bg_color=get_color_from_hex("#FFFFFF"),  # SURFACE_CARD
+            md_bg_color=get_color_from_hex(SURFACE_CARD),
         )
         
         self.clear_widgets()

@@ -20,7 +20,7 @@ from kivymd.uix.widget import MDWidget
 from kivymd.app import MDApp
 
 from components.topbar import create_topbar
-from components.theme import action_bar, flex_columns
+from components.theme import action_bar, flex_columns, SUCCESS_BG, INFO_BG, DARK_PRIMARY, ERROR_BG, WARNING_BG
 from data.repository import repo
 
 
@@ -49,12 +49,12 @@ class InventoryScreen(MDScreen):
         # ── KPIs valorizado ──
         kpi = MDGridLayout(cols=3, spacing="12dp", adaptive_height=True, size_hint_x=1, padding="12dp")
         for title, value, color in [
-            ("Valorizado costo", val["cost_fmt"], "#009688"),  # SUCCESS_BG
-            ("Valorizado venta", val["sale_fmt"], "#03a9f4"),  # INFO_BG (azul)
-            ("Unidades totales", str(val["units"]), "#00796b"),  # Púrpura para unidades
-            (f"Stock bajo <min ({len(low)})", ", ".join([p["sku"] for p in low[:3]]) or "OK", "#F44336" if low else "#009688"),  # ERROR_BG / SUCCESS_BG
-            (f"Exceso >max ({len(excess)})", ", ".join([p["sku"] for p in excess[:3]]) or "OK", "#FFC107" if excess else "#009688"),  # WARNING_BG / SUCCESS_BG
-            (f"Agotado 0 ({len(out)})", ", ".join([p["sku"] for p in out[:3]]) or "0", "#F44336" if out else "#009688"),  # ERROR_BG / SUCCESS_BG
+            ("Valorizado costo", val["cost_fmt"], SUCCESS_BG),
+            ("Valorizado venta", val["sale_fmt"], INFO_BG),
+            ("Unidades totales", str(val["units"]), DARK_PRIMARY),
+            (f"Stock bajo <min ({len(low)})", ", ".join([p["sku"] for p in low[:3]]) or "OK", ERROR_BG if low else SUCCESS_BG),
+            (f"Exceso >max ({len(excess)})", ", ".join([p["sku"] for p in excess[:3]]) or "OK", WARNING_BG if excess else SUCCESS_BG),
+            (f"Agotado 0 ({len(out)})", ", ".join([p["sku"] for p in out[:3]]) or "0", ERROR_BG if out else SUCCESS_BG),
         ]:
             kpi.add_widget(
                 MDCard(

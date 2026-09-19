@@ -19,7 +19,7 @@ from kivymd.uix.widget import MDWidget
 from kivymd.app import MDApp
 
 from components.topbar import create_topbar
-from components.theme import action_bar, flex_columns
+from components.theme import action_bar, flex_columns, WARNING_BG, INFO_BG, SUCCESS_BG, ERROR_BG
 from data.repository import repo
 
 
@@ -43,10 +43,10 @@ class PurchasesScreen(MDScreen):
         low = repo.low_stock_products(10)
         kpi = MDGridLayout(cols=4, spacing="12dp", adaptive_height=True, size_hint_x=1, padding="12dp")
         for title, val, color in [
-            ("Pendiente", str(pending), "#FFC107"),  # WARNING_BG
-            ("En tránsito", str(transit), "#03a9f4"),  # INFO_BG (azul)
-            ("Recibida", str(received), "#009688"),  # SUCCESS_BG
-            (f"Stock bajo {len(low)}", ", ".join([p["sku"] for p in low[:2]]) or "OK", "#F44336" if low else "#009688"),  # ERROR_BG / SUCCESS_BG
+            ("Pendiente", str(pending), WARNING_BG),
+            ("En tránsito", str(transit), INFO_BG),
+            ("Recibida", str(received), SUCCESS_BG),
+            (f"Stock bajo {len(low)}", ", ".join([p["sku"] for p in low[:2]]) or "OK", ERROR_BG if low else SUCCESS_BG),
         ]:
             kpi.add_widget(MDCard(
                 MDLabel(text=title, font_style="Title", role="small", adaptive_height=True, halign="center"),

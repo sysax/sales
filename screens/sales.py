@@ -19,7 +19,7 @@ from kivymd.uix.widget import MDWidget
 from kivymd.app import MDApp
 
 from components.topbar import create_topbar
-from components.theme import action_bar, flex_columns
+from components.theme import action_bar, flex_columns, INFO_BG, SUCCESS_BG, DARK_PRIMARY, WARNING_BG, ERROR_BG
 from data.repository import repo
 
 
@@ -44,7 +44,7 @@ class SalesScreen(MDScreen):
             cnt_status[s.get("estado", s["status"])] = cnt_status.get(s.get("estado", s["status"]), 0) + 1
         kpi = MDGridLayout(cols=4, spacing="12dp", adaptive_height=True, size_hint_x=1, padding="12dp")
         for st in ["Cotización","Pedido","Facturada","Pagada","Entregada","Cancelada"]:
-            col = "#03a9f4" if st in ("Cotización","Pedido") else "#009688" if st=="Pagada" else "#00796b" if st=="Facturada" else "#FFC107" if st=="Entregada" else "#F44336"  # Azul/INFO_BG, Verde/SUCCESS_BG, Púrpura, Naranja/WARNING_BG, Rojo/ERROR_BG
+            col = INFO_BG if st in ("Cotización","Pedido") else SUCCESS_BG if st=="Pagada" else DARK_PRIMARY if st=="Facturada" else WARNING_BG if st=="Entregada" else ERROR_BG
             kpi.add_widget(MDCard(
                 MDLabel(text=st, font_style="Title", role="small", halign="center", adaptive_height=True),
                 MDLabel(text=str(cnt_status.get(st,0)), font_style="Headline", role="small", halign="center", theme_text_color="Custom", text_color=col, adaptive_height=True),
